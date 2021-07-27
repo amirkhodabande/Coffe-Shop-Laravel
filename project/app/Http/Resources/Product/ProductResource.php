@@ -16,7 +16,7 @@ class ProductResource extends JsonResource
     {
         return [
             'title' => $this->title,
-            'url' => env('APP_URL'),
+            'url' => env('APP_URL')."/".$this->slug,
             'sale' => $this->ordersCount,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
