@@ -15,10 +15,10 @@ class CreateProductOptionsTable extends Migration
     {
         Schema::create('product_options', function (Blueprint $table) {
             $table->id();
-            $table->enum('milk', ['', 'skim', 'semi', 'whole'])->default('');
-            $table->enum('shots', ['', 'single', 'double', 'triple'])->default('');
-            $table->enum('size', ['', 'small', 'medium', 'large'])->default('');
-            $table->enum('kind', ['', 'chocolate', 'chip', 'ginger'])->default('');
+            $table->enum('milk', ['', 'skim', 'semi', 'whole'])->nullable();
+            $table->enum('shots', ['', 'single', 'double', 'triple'])->nullable();
+            $table->enum('size', ['', 'small', 'medium', 'large'])->nullable();
+            $table->enum('kind', ['', 'chocolate', 'chip', 'ginger'])->nullable();
             $table->timestamps();
         });
     }
