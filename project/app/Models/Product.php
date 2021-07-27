@@ -17,11 +17,11 @@ class Product extends Model
     }
 
     /**
-     * Get information about the sale of this product.
+     * Get orders
      */
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsToMany(Order::class);
     }
 
     /**
