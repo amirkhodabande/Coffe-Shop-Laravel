@@ -18,14 +18,23 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(['email' => 'manager@coffe.malltina', 'type' => 'manager'])->create();
+        $user = User::factory(['email' => 'amir@amir.com', 'type' => 'customer'])->create();
 
 //      Creating product
-        $products = Product::factory(6)->create();
+        $orderedProducts = Product::factory(4)->create();
+        $products = Product::factory(2)->create();
 
 //      Creating some options
         $options = ProductOption::factory()->create();
 
 //       Registering the final order
-        Order::factory(['product_id' => $products->first()->id, 'options_id' => $options->first()->id])->create();
+        $order = $user->orders()->create([
+            'consume_location' => 'in shop',
+            'status' => 'waiting'
+        ]);
+
+        foreach ($orderedProducts as $orderedProduct) {
+            $orderedProduct->orders()->save($order, ['options_id' => $options->first()->id]);
+        }
     }
 }
