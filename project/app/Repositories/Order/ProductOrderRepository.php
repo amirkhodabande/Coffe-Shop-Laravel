@@ -56,15 +56,15 @@ class ProductOrderRepository implements OrderRepositoryInterface
      *
      * @param $products
      * @param $order
-     * @return mixed
+     * @return void
      */
-    private function calculatePrice($products, $order): mixed
+    private function calculatePrice($products, $order): void
     {
         $price = 0;
         foreach ($products as $product) {
             $price += $product->price;
         }
-        return $order->update(['price' => $price]);
+        $order->update(['price' => $price]);
     }
 
     /**
