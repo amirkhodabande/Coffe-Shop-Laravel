@@ -21,7 +21,10 @@ Route::middleware(['auth:sanctum', 'user.type'])->prefix('/manager')->group(func
 // Customers
 Route::middleware('auth:sanctum')->group(function () {
 
+//  Products
     Route::get('/', [ProductController::class, 'index']);
+
+//  Orders
     Route::post('/order', [OrderController::class, 'order']);
 
 });
