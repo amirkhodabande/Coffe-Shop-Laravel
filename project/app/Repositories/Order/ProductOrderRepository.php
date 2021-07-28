@@ -20,7 +20,7 @@ class ProductOrderRepository implements OrderRepositoryInterface
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function order(Request $request)
+    public function order(Request $request): \Illuminate\Http\Response
     {
         $products = $request['order']['products'];
         $consumeLocation = $request['order']['consume_location'];
