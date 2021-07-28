@@ -26,7 +26,8 @@ class ProductFactory extends Factory
         $title = $this->faker->randomElement($productArray) . ' ' . $this->faker->unique()->title();
         return [
             'title' => $title,
-            'slug' => Str::slug($title)
+            'slug' => Str::slug($title),
+            'price' => $this->faker->numberBetween(30000, 100000)
         ];
     }
 }
