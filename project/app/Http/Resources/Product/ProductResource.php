@@ -15,6 +15,7 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'title' => $this->title,
             'url' => env('APP_URL')."/".$this->slug,
             'sale' => $this->ordersCount,
