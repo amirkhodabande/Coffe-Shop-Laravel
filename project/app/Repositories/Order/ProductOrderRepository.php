@@ -101,15 +101,28 @@ class ProductOrderRepository implements OrderRepositoryInterface
     private function finalResponse($order): array
     {
         $order = Order::find($order['id']);
+        $products = [];
+
+        foreach ($order->products as $product) {
+
+            $id = $product->pivot['options_id'];
+
+            $options = ProductOption::find($id)->attributesToArray();
+
+            $options = array_diff_key($options, array_flip(['id', 'created_at', 'updated_at']));
+
+            $options = array_filter($options, fn($value) => !is_null($value) && $value !== '');
+
+            $products[] = array_merge($product->attributesToArray(), ['custom_options' => $options]);
+        }
+
         return [
             'Order' => [
                 'consume_location' => $order['consume_location'],
                 'status' => $order['status'],
                 'price' => $order['price']
             ],
-            'Products' => [
-                $order->products()->select('title', 'price')->get()
-            ]
+            'Products' => $products
         ];
     }
 }
