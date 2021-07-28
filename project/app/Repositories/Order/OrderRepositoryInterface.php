@@ -2,13 +2,13 @@
 
 namespace App\Repositories\Order;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 interface OrderRepositoryInterface {
 
-    /**
-     * @param Request $request
-     */
     public function order(Request $request);
+
+    public function get(Order $order);
 
 }
