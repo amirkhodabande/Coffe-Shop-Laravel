@@ -40,6 +40,11 @@ class ProductOrderRepository implements OrderRepositoryInterface
         return response(['message' => 'Order registered successfully!', 'data' => $finalResponse]);
     }
 
+    public function get(Order $order)
+    {
+        return response($this->finalResponse($order));
+    }
+
     /**
      * @param $consumeLocation
      * @return mixed
@@ -84,6 +89,7 @@ class ProductOrderRepository implements OrderRepositoryInterface
             $options[] = ProductOption::create($product['product_options']);
         }
 
+//      Attach order, product and options
         $i = 0;
         foreach ($products as $product) {
             Product::find($product['product_id'])->orders()->save($order, ['options_id' => $options[$i]['id']]);
