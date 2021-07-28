@@ -36,5 +36,11 @@ class DatabaseSeeder extends Seeder
         foreach ($orderedProducts as $orderedProduct) {
             $orderedProduct->orders()->save($order, ['options_id' => $options->first()->id]);
         }
+
+        $price = 0;
+        foreach ($products as $product) {
+            $price += $product->price;
+        }
+        $order->update(['price' => $price]);
     }
 }
