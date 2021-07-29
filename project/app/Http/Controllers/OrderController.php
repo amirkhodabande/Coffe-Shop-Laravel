@@ -10,10 +10,11 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     private OrderRepositoryInterface $productOrderRepository;
+
     public function __construct(OrderRepositoryInterface $productOrderRepository)
     {
         $this->productOrderRepository = $productOrderRepository;
-        $this->middleware('ownership.check', ['only' => ['get']]);
+        $this->middleware('ownership.check', ['only' => ['get', 'update']]);
     }
 
     /**
@@ -32,5 +33,24 @@ class OrderController extends Controller
     public function get(Order $order)
     {
         return $this->productOrderRepository->get($order);
+    }
+
+    /**
+     * Cancel a customer's order.
+     *
+     * Changing the status of canceled orders is limited.
+     *
+     * @param Order $order
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Order $order): \Illuminate\Http\Response
+    {
+        if ($order['status'] !== 'canceled') {
+
+            $order->update(['status' => 'canceled']);
+            return response("Order canceled successfully.", 202);
+
+        }
+        return response("The selected order is already canceled!", 200);
     }
 }
