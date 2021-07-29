@@ -39,7 +39,7 @@ class AuthController extends Controller
             return response(['message' => 'User logged in successfully.', 'user' => $user]);
         }
         else{
-            return response("Unauthorized");
+            return response(['message' => 'These credentials do not match our records.'], 422);
         }
     }
 }
