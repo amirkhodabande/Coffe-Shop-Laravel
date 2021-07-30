@@ -17,7 +17,7 @@ class OwnershipCheck
     public function handle(Request $request, Closure $next)
     {
 
-        return (auth()->user()->id == $request->order->user_id) ? $next($request) : response("This is not one of your orders!", 401);
+        return (auth()->user()->id == $request->order->user_id) ? $next($request) : response(['message' => 'This is not one of your orders!'], 401);
 
     }
 }
