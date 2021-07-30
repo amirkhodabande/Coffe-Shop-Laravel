@@ -48,9 +48,9 @@ class OrderController extends Controller
         if ($order['status'] !== 'canceled') {
 
             $order->update(['status' => 'canceled']);
-            return response("Order canceled successfully.", 202);
+            return response(['message' => 'Order canceled successfully.'], 202);
 
         }
-        return response("The selected order is already canceled!", 200);
+        return response(['message' => 'The selected order is already canceled!'], 200);
     }
 }
