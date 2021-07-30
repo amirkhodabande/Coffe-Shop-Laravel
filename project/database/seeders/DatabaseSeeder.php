@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductOption;
 use App\Models\User;
@@ -17,8 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(['email' => 'manager@coffe.malltina', 'type' => 'manager'])->create();
-        $user = User::factory(['email' => 'amir@amir.com', 'type' => 'customer'])->create();
+        User::factory(['email' => 'manager@coffe.com', 'type' => 'manager'])->create();
+        $user = User::factory(['email' => 'customer@coffe.com', 'type' => 'customer'])->create();
 
 //      Creating product
         $orderedProducts = Product::factory(4)->create();

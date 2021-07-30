@@ -25,6 +25,9 @@ setup:
 	# migration
 	docker exec -it php_coffe_shop bash -c "cd /var/www/html/website ; php artisan migrate"
 
+	# database seeder
+	docker exec -it php_coffe_shop bash -c "cd /var/www/html/website ; php artisan db:seed"
+
 	# clear the cache
 	docker exec -it php_coffe_shop bash -c "cd /var/www/html/website ; php artisan cache:clear"
 	docker exec -it php_coffe_shop bash -c "cd /var/www/html/website ; chmod -R 775 storage"
