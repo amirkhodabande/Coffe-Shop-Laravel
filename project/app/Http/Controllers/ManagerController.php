@@ -21,15 +21,19 @@ class ManagerController extends Controller
     public function update(Order $order, OrderRequest $request): \Illuminate\Http\Response
     {
         if ($order['status'] !== 'canceled') {
-            $order->update(['status' => $request['status']]);
-            $this->sendMail($order);
+
+            if ($order['status'] != $request['status']) {
+                $order->update(['status' => $request['status']]);
+                $this->sendMail($order);
+            }
+
             return ($request['status'] == "canceled")
                 ?
-                response("Order canceled successfully.", 202)
+                response(['message' => 'Order canceled successfully.'], 202)
                 :
-                response("Order status successfully updated to " . $request['status'] . ".", 202);
+                response(['message' => 'Order status successfully updated to ' . $request['status'] . "."], 202);
         } else
-            return response("You are not able to change the Canceled orders status.", 200);
+            return response(['message' => 'You are not able to change the Canceled orders status.'], 200);
     }
 
     /**
