@@ -16,8 +16,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->enum('consume_location', ['in shop', 'take away']);
-            $table->enum('status', ['waiting', 'preparation', 'ready', 'delivered', 'canceled']);
+            $table->enum('consume_location', ['in shop', 'take away'])->default('in shop');
+            $table->enum('status', ['waiting', 'preparation', 'ready', 'delivered', 'canceled'])->default('waiting');
             $table->integer('price')->default(0);
             $table->timestamps();
         });
